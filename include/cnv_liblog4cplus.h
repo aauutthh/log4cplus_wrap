@@ -1,5 +1,4 @@
 
-
 #pragma once
 #ifdef __cplusplus
 extern "C" {
@@ -8,9 +7,8 @@ extern "C" {
 #ifndef CNV_LIBLOG4PLUS_H_
 #define CNV_LIBLOG4PLUS_H_
 
-#include <stdio.h>
-#define LOG4CPLUS_OUTBUF (4096)
-#define LOG4CPLUS_FILENAME FILENAME_MAX
+#define LOG4CPLUS_OUTBUF 4096
+#define LOG4CPLUS_FILENAME 128
 #include "cnv_log_bridge.h"
 
 #ifdef WIN32
@@ -34,55 +32,59 @@ extern "C" {
 
 //设定配置文件
 void set_config(const char * filename,char errmsg[],int msg_length);
-
 // app
 #define LOG_APP_DEBUG(fmt, ...) \
   do \
   { \
+    if ( LL_DEBUG_LOG_LEVEL < LOG_APP_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_APP_DEBUG_(outbuf); \
   } while (0)
 
 #define LOG_APP_INFO(fmt, ...) \
   do \
   { \
+    if ( LL_INFO_LOG_LEVEL < LOG_APP_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_APP_INFO_(outbuf); \
   } while (0)
 
 #define LOG_APP_WARN(fmt, ...) \
   do \
   { \
+    if ( LL_WARN_LOG_LEVEL < LOG_APP_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_APP_WARN_(outbuf); \
   } while (0)
 
 #define LOG_APP_ERROR(fmt, ...) \
   do \
   { \
+    if ( LL_ERROR_LOG_LEVEL < LOG_APP_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_APP_ERROR_(outbuf); \
   } while (0)
 
 #define LOG_APP_FATAL(fmt, ...) \
   do \
   { \
+    if ( LL_FATAL_LOG_LEVEL < LOG_APP_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_APP_FATAL_(outbuf); \
   } while (0)
   
@@ -92,50 +94,55 @@ void set_config(const char * filename,char errmsg[],int msg_length);
 #define LOG_ACC_DEBUG(fmt, ...) \
   do \
   { \
+    if ( LL_DEBUG_LOG_LEVEL < LOG_ACC_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_ACC_DEBUG_(outbuf); \
   } while (0)
 
 #define LOG_ACC_INFO(fmt, ...) \
   do \
   { \
+    if ( LL_INFO_LOG_LEVEL < LOG_ACC_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_ACC_INFO_(outbuf); \
   } while (0)
 
 #define LOG_ACC_WARN(fmt, ...) \
   do \
   { \
+    if ( LL_WARN_LOG_LEVEL < LOG_ACC_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_ACC_WARN_(outbuf); \
   } while (0)
 
 #define LOG_ACC_ERROR(fmt, ...) \
   do \
   { \
+    if ( LL_ERROR_LOG_LEVEL < LOG_ACC_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_ACC_ERROR_(outbuf); \
   } while (0)
 
 #define LOG_ACC_FATAL(fmt, ...) \
   do \
   { \
+    if ( LL_FATAL_LOG_LEVEL < LOG_ACC_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_ACC_FATAL_(outbuf); \
   } while (0)
 
@@ -143,66 +150,59 @@ void set_config(const char * filename,char errmsg[],int msg_length);
 #define LOG_SYS_DEBUG(fmt, ...) \
   do \
   { \
+    if ( LL_DEBUG_LOG_LEVEL < LOG_SYS_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_SYS_DEBUG_(outbuf); \
   } while (0)
 
 #define LOG_SYS_INFO(fmt, ...) \
   do \
   { \
+    if ( LL_INFO_LOG_LEVEL < LOG_SYS_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_SYS_INFO_(outbuf); \
   } while (0)
 
 #define LOG_SYS_WARN(fmt, ...) \
   do \
   { \
+    if ( LL_WARN_LOG_LEVEL < LOG_SYS_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_SYS_WARN_(outbuf); \
   } while (0)
 
 #define LOG_SYS_ERROR(fmt, ...) \
   do \
   { \
+    if ( LL_ERROR_LOG_LEVEL < LOG_SYS_GET_LEVEL_() ) {break;} \
     char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_SYS_ERROR_(outbuf); \
   } while (0)
 
 #define LOG_SYS_FATAL(fmt, ...) \
   do \
   { \
-    char outbuf[LOG4CPLUS_OUTBUF];\
+    if ( LL_FATAL_LOG_LEVEL < LOG_SYS_GET_LEVEL_() ) {break;} \
+    char outbuf[LOG4CPLUS_OUTBUF]; \
     char filename[LOG4CPLUS_FILENAME];\
     LOGGER_GETFILENAME(__FILE__,filename);\
-    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|" fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
+    snprintf(outbuf, LOG4CPLUS_OUTBUF, "%s|%d|%s|"fmt, filename, __LINE__, __FUNCTION__ , ## __VA_ARGS__); \
     LOG_SYS_FATAL_(outbuf); \
   } while (0)
 
 #endif //CNV_LIBLOG4PLUS_H_
-
-// #undef LOG_SYS_FATAL
-// #undef LOG_SYS_ERROR
-// #undef LOG_SYS_WARN
-// #undef LOG_SYS_INFO
-// #undef LOG_SYS_DEBUG
-// 
-// #define LOG_SYS_FATAL printf
-// #define LOG_SYS_ERROR printf
-// #define LOG_SYS_WARN  printf
-// #define LOG_SYS_INFO  printf
-// #define LOG_SYS_DEBUG printf
 
 #ifdef __cplusplus
 }
