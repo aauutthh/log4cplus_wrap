@@ -6,18 +6,10 @@ ADD_EXECUTABLE(test2 ${SRC_LIST})
 INCLUDE_DIRECTORIES(${PROJECT_ROOT_PATH}/include)
 INCLUDE_DIRECTORIES(${SYS_LIBLOG4CPLUS}/include)
 
-if(NOT ${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Darwin")
+if(NOT ${APPLE})
 TARGET_LINK_LIBRARIES(test2  pthread rt)
 endif()
 
-#TARGET_LINK_LIBRARIES(test2 pthread rt)
-
 
 TARGET_LINK_LIBRARIES(test2 ${PROJECT_ROOT_PATH}/lib/libcnv_liblog4cplus.a log4cplus)
-
-#TARGET_LINK_LIBRARIES(test2 ${SYS_LIBLOG4CPLUS}/.libs/liblog4cplus.a)
-
-
-
-
 

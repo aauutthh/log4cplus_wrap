@@ -9,4 +9,7 @@ ADD_LIBRARY(cnv_liblog4cplus SHARED ${SRC_LIST})
 ADD_LIBRARY(cnv_liblog4cplus_static STATIC ${SRC_LIST})
 SET_TARGET_PROPERTIES(cnv_liblog4cplus_static PROPERTIES OUTPUT_NAME "cnv_liblog4cplus")
 target_link_libraries(cnv_liblog4cplus_static log4cplus)
+
+if(${APPLE})
 target_link_libraries(cnv_liblog4cplus log4cplus)
+endif()
